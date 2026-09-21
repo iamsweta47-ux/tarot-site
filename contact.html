@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Tarot Atlas | संपर्क करें</title>
+<meta name="description" content="Get in touch with Tarot Atlas — questions, feedback, or partnership inquiries. हमसे संपर्क करें।">
+<link rel="canonical" href="https://example.com/contact.html">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-row">
+    <a href="index.html" class="brand"><span class="mark">✦</span> Tarot Atlas</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html" lang-en>Home</a><a href="index.html" lang-hi>होम</a>
+      <a href="major-arcana.html" lang-en>Major Arcana</a><a href="major-arcana.html" lang-hi>मेजर आर्काना</a>
+      <div class="dropdown">
+        <a href="minor-arcana.html" lang-en>Minor Arcana ▾</a><a href="minor-arcana.html" lang-hi>माइनर आर्काना ▾</a>
+        <div class="dropdown-menu">
+          <a href="minor-arcana/wands.html" lang-en>Wands</a><a href="minor-arcana/wands.html" lang-hi>वैंड्स</a>
+          <a href="minor-arcana/cups.html" lang-en>Cups</a><a href="minor-arcana/cups.html" lang-hi>कप्स</a>
+          <a href="minor-arcana/swords.html" lang-en>Swords</a><a href="minor-arcana/swords.html" lang-hi>स्वॉर्ड्स</a>
+          <a href="minor-arcana/pentacles.html" lang-en>Pentacles</a><a href="minor-arcana/pentacles.html" lang-hi>पेंटेकल्स</a>
+        </div>
+      </div>
+      <a href="how-to-use.html" lang-en>How to Use</a><a href="how-to-use.html" lang-hi>कैसे उपयोग करें</a>
+      <a href="faq.html" lang-en>FAQ</a><a href="faq.html" lang-hi>सामान्य प्रश्न</a>
+      <a href="contact.html" class="active" lang-en>Contact</a><a href="contact.html" class="active" lang-hi>संपर्क करें</a>
+      <div class="lang-switch">
+        <button data-lang="en" type="button">EN</button>
+        <button data-lang="hi" type="button">हिं</button>
+      </div>
+    </nav>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<section class="section container" style="max-width:720px;">
+  <nav class="breadcrumb"><a href="index.html" lang-en>Home</a><a href="index.html" lang-hi>होम</a> / <span lang-en>Contact</span><span lang-hi>संपर्क करें</span></nav>
+  <p class="eyebrow" lang-en>Get in touch</p><p class="eyebrow" lang-hi>संपर्क में रहें</p>
+  <h1 lang-en>Contact Us</h1>
+  <h1 lang-hi>हमसे संपर्क करें</h1>
+  <p class="hero-lede" lang-en>Questions about a card, feedback on the site, or a partnership inquiry — we read every message. You can also reach us directly at <span style="color:var(--gold-soft);">hello@tarotatlas.example.com</span>.</p>
+  <p class="hero-lede" lang-hi>किसी कार्ड के बारे में प्रश्न, साइट पर प्रतिक्रिया, या साझेदारी संबंधी पूछताछ — हम हर संदेश पढ़ते हैं। आप हमसे सीधे <span style="color:var(--gold-soft);">hello@tarotatlas.example.com</span> पर भी संपर्क कर सकते हैं।</p>
+
+  <!-- Netlify Forms: the data-netlify attribute registers this form with
+       Netlify's form-handling backend at deploy time. A hidden input
+       matching the form name is required for Netlify's bot detection. -->
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="form-grid" style="margin-top:40px;">
+    <input type="hidden" name="form-name" value="contact">
+    <p style="display:none;">
+      <label>Don't fill this out: <input name="bot-field"></label>
+    </p>
+
+    <div>
+      <label for="name"><span lang-en>Name</span><span lang-hi>नाम</span></label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+      <label for="email"><span lang-en>Email</span><span lang-hi>ईमेल</span></label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div>
+      <label for="subject"><span lang-en>Subject</span><span lang-hi>विषय</span></label>
+      <input type="text" id="subject" name="subject">
+    </div>
+    <div>
+      <label for="message"><span lang-en>Message</span><span lang-hi>संदेश</span></label>
+      <textarea id="message" name="message" rows="6" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-solid" style="justify-self:start;">
+      <span lang-en>Send Message</span><span lang-hi>संदेश भेजें</span>
+    </button>
+  </form>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:1px solid var(--line-hair); padding-top:24px;">
+      <span>© 2026 Tarot Atlas. <span lang-en>All rights reserved.</span><span lang-hi>सर्वाधिकार सुरक्षित।</span></span>
+      <span>
+        <a href="privacy-policy.html" lang-en>Privacy</a><a href="privacy-policy.html" lang-hi>गोपनीयता</a> ·
+        <a href="disclaimer.html" lang-en>Disclaimer</a><a href="disclaimer.html" lang-hi>अस्वीकरण</a> ·
+        <a href="terms.html" lang-en>Terms</a><a href="terms.html" lang-hi>नियम</a>
+      </span>
+    </div>
+  </div>
+</footer>
+<script src="js/script.js"></script>
+</body>
+</html>
