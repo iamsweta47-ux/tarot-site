@@ -312,3 +312,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .legal-body p, .legal-body li{ color: var(--mist); max-width: 74ch; }
 .legal-body ul{ padding-left: 22px; }
 .updated-date{ color: var(--mist-dim); font-size: 0.82rem; margin-bottom: 40px; }
+
+/* --- App download (APK / install) --- */
+[hidden]{ display:none !important; }
+.app-get{ margin-top:20px; display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
+.app-get .btn{ padding:11px 22px; font-size:0.88rem; }
