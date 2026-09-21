@@ -1,0 +1,24 @@
+{
+  "id": "/",
+  "name": "Tarot Atlas — Learn Tarot",
+  "short_name": "Tarot Atlas",
+  "description": "Learn all 78 tarot cards in English and Hindi — upright and reversed meanings for love, career and spirituality.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0F1229",
+  "theme_color": "#0F1229",
+  "categories": ["education", "lifestyle"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Major Arcana", "url": "/major-arcana.html", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "How to Use", "url": "/how-to-use.html", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}
