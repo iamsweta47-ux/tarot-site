@@ -1,0 +1,314 @@
+/* =========================================================
+   TAROT ATLAS — Design System
+   A mystical-professional identity built around a single
+   idea: the "star chart" — thin constellation lines connecting
+   fixed points, echoing how tarot connects card to card in a
+   spread. That motif is the one bold move; everything else
+   stays quiet and disciplined around it.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@300;400;500;600&family=Hind:wght@300;400;500;600&family=Baloo+2:wght@500;600;700&display=swap');
+
+:root{
+  /* --- Color: named, deliberate --- */
+  --ink-void:        #0F1229;   /* near-black indigo, page background */
+  --ink-deep:         #171B3D;  /* panel background, one step up from void */
+  --ink-plum:         #4B2E6B;  /* secondary accent, muted violet */
+  --gold-leaf:        #C9A64B;  /* primary accent — desaturated gold, not neon */
+  --gold-soft:        #E4D3A0;  /* gold for text-on-dark, hover states */
+  --parchment:         #F3EFE4; /* off-white, used sparingly for high-contrast panels */
+  --mist:               #B9B4CE; /* muted lavender-grey body text on dark */
+  --mist-dim:           #756F92; /* de-emphasized text, captions */
+  --line-hair:          rgba(201,166,75,0.18); /* hairline dividers */
+  --line-hair-bright:   rgba(201,166,75,0.4);
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'Work Sans', -apple-system, sans-serif;
+  --font-display-hi: 'Baloo 2', 'Fraunces', serif;
+  --font-body-hi: 'Hind', 'Work Sans', sans-serif;
+
+  --radius-card: 2px;
+  --max-w: 1180px;
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin:0;
+  background: var(--ink-void);
+  color: var(--mist);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Language handling: default document language is English.
+   Elements carry both an English and Hindi version; JS toggles
+   a class on <html> and CSS shows/hides accordingly, and swaps
+   the active font stack so Devanagari renders with proper
+   proportions instead of being squeezed into a Latin serif. */
+[lang-en]{ display:inline; }
+[lang-hi]{ display:none; }
+html.lang-hi [lang-en]{ display:none; }
+html.lang-hi [lang-hi]{ display:inline; }
+html.lang-hi [lang-hi].block{ display:block; }
+html.lang-hi body{ font-family: var(--font-body-hi); }
+html.lang-hi h1, html.lang-hi h2, html.lang-hi h3,
+html.lang-hi .display{ font-family: var(--font-display-hi); }
+
+[lang-hi]{ font-family: var(--font-body-hi); }
+
+a{ color: inherit; text-decoration: none; }
+img{ max-width:100%; display:block; }
+.container{ max-width: var(--max-w); margin: 0 auto; padding: 0 28px; }
+
+h1,h2,h3,h4{
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--parchment);
+  margin: 0 0 0.5em;
+  letter-spacing: 0.01em;
+}
+h1{ font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 500; line-height: 1.05; }
+h2{ font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1.15; }
+h3{ font-size: 1.3rem; }
+p{ max-width: 62ch; }
+p.wide{ max-width: none; }
+
+/* --- Constellation motif (SVG background, used sparingly) --- */
+.constellation-bg{
+  position: absolute; inset:0; overflow:hidden; pointer-events:none;
+  opacity: 0.5;
+}
+
+/* --- Header / nav --- */
+.site-header{
+  position: sticky; top:0; z-index: 50;
+  background: rgba(15,18,41,0.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line-hair);
+}
+.nav-row{
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 18px 28px; max-width: var(--max-w); margin:0 auto;
+}
+.brand{
+  font-family: var(--font-display); font-size: 1.35rem; color: var(--parchment);
+  display:flex; align-items:center; gap:10px;
+}
+.brand .mark{ color: var(--gold-leaf); font-size:1.1em; }
+.nav-links{ display:flex; gap: 30px; align-items:center; }
+.nav-links a{
+  font-size: 0.93rem; color: var(--mist); position:relative; padding: 4px 0;
+  transition: color .2s ease;
+}
+.nav-links a:hover{ color: var(--gold-soft); }
+.nav-links a.active{ color: var(--gold-leaf); }
+.nav-links .dropdown{ position:relative; }
+.dropdown-menu{
+  position:absolute; top: 130%; left:0; min-width: 190px;
+  background: var(--ink-deep); border: 1px solid var(--line-hair);
+  padding: 8px 0; opacity:0; visibility:hidden; transform: translateY(-6px);
+  transition: all .18s ease;
+}
+.dropdown:hover .dropdown-menu, .dropdown:focus-within .dropdown-menu{
+  opacity:1; visibility:visible; transform:translateY(0);
+}
+.dropdown-menu a{ display:block; padding: 9px 18px; font-size: .88rem; }
+.dropdown-menu a:hover{ background: rgba(201,166,75,0.08); }
+
+.lang-switch{
+  display:flex; border: 1px solid var(--line-hair-bright); border-radius: 20px;
+  overflow:hidden; font-size: 0.78rem;
+}
+.lang-switch button{
+  background:none; border:none; color: var(--mist); padding: 6px 14px;
+  cursor:pointer; font-family: var(--font-body); font-weight:500;
+  transition: all .2s ease;
+}
+.lang-switch button.on{ background: var(--gold-leaf); color: var(--ink-void); }
+
+.hamburger{ display:none; background:none; border:none; color:var(--parchment); font-size:1.6rem; cursor:pointer; }
+
+@media (max-width: 860px){
+  .nav-links{
+    position:fixed; inset: 68px 0 0 0; background: var(--ink-void);
+    flex-direction:column; padding: 30px 28px; gap: 22px;
+    transform: translateX(100%); transition: transform .25s ease;
+  }
+  .nav-links.open{ transform: translateX(0); }
+  .dropdown-menu{ position:static; opacity:1; visibility:visible; transform:none; display:none; background:none; border:none; padding-left: 12px;}
+  .dropdown.open .dropdown-menu{ display:block; }
+  .hamburger{ display:block; }
+}
+
+/* --- Buttons --- */
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  padding: 13px 28px; font-family: var(--font-body); font-weight:500;
+  font-size: 0.95rem; border: 1px solid var(--gold-leaf); color: var(--parchment);
+  background: transparent; cursor:pointer; transition: all .25s ease;
+}
+.btn:hover{ background: var(--gold-leaf); color: var(--ink-void); }
+.btn-solid{ background: var(--gold-leaf); color: var(--ink-void); }
+.btn-solid:hover{ background: var(--gold-soft); border-color: var(--gold-soft); }
+
+/* --- Hero --- */
+.hero{
+  position:relative; padding: 100px 0 90px; overflow:hidden;
+  border-bottom: 1px solid var(--line-hair);
+}
+.hero-grid{
+  display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items:center;
+  position:relative; z-index:2;
+}
+.hero-eyebrow{ color: var(--gold-leaf); font-size: 0.85rem; margin-bottom: 18px; }
+.hero h1 .accent{ font-style: italic; color: var(--gold-soft); }
+.hero-lede{ color: var(--mist); font-size: 1.08rem; margin: 22px 0 34px; }
+.hero-cta-row{ display:flex; gap: 16px; flex-wrap:wrap; }
+.hero-card-fan{ position:relative; height: 380px; }
+@media (max-width: 900px){
+  .hero-grid{ grid-template-columns: 1fr; }
+  .hero-card-fan{ height: 260px; order:-1; }
+}
+
+/* --- Tarot card visual (used across hero, grids, and card pages) --- */
+.tarot-card{
+  aspect-ratio: 2 / 3.45;
+  background: linear-gradient(160deg, var(--ink-deep), #201543 70%);
+  border: 1px solid var(--line-hair-bright);
+  border-radius: var(--radius-card);
+  position:relative; overflow:hidden;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding: 14px;
+}
+.tarot-card::before{
+  content:''; position:absolute; inset:6px; border: 1px solid var(--line-hair);
+}
+.tarot-card .glyph{ font-size: 2.6rem; color: var(--gold-leaf); }
+.tarot-card .cardname{
+  font-family: var(--font-display); color: var(--parchment); font-size: 0.85rem;
+  text-align:center; margin-top: 10px; letter-spacing: 0.03em;
+}
+.tarot-card .cardnum{ position:absolute; top:14px; left:14px; font-size:.7rem; color:var(--mist-dim); }
+
+/* --- Section shell --- */
+.section{ padding: 84px 0; }
+.section-head{ margin-bottom: 44px; max-width: 640px; }
+.section-head p{ color: var(--mist); }
+.divider{ height:1px; background: var(--line-hair); border:none; margin: 0; }
+
+/* --- Featured card grid --- */
+.card-grid{
+  display:grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 22px;
+}
+.card-tile{ cursor:pointer; }
+.card-tile .tarot-card{ transition: transform .35s ease, border-color .35s ease; }
+.card-tile:hover .tarot-card{ transform: translateY(-6px); border-color: var(--gold-leaf); }
+.card-tile .tile-caption{
+  margin-top: 12px; font-size: 0.85rem; color: var(--mist); text-align:center;
+}
+
+/* --- Suit grid (Minor Arcana overview) --- */
+.suit-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+@media (max-width: 760px){ .suit-grid{ grid-template-columns: repeat(2,1fr); } }
+.suit-panel{
+  border: 1px solid var(--line-hair); padding: 30px 24px; position:relative;
+  background: var(--ink-deep);
+}
+.suit-panel .suit-glyph{ font-size: 1.8rem; color: var(--gold-leaf); margin-bottom: 14px; }
+.suit-panel h3{ margin-bottom: 6px; }
+.suit-panel p{ font-size: 0.88rem; color: var(--mist-dim); }
+
+/* --- Ad slots: clearly labelled, boxed, non-intrusive --- */
+.ad-slot{
+  border: 1px dashed var(--line-hair-bright);
+  color: var(--mist-dim); font-size: 0.75rem;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center; padding: 18px; letter-spacing:0.04em;
+  background: rgba(255,255,255,0.015);
+}
+.ad-slot.leaderboard{ min-height: 90px; margin: 0 0 40px; }
+.ad-slot.in-content{ min-height: 120px; margin: 48px 0; }
+.ad-slot.sidebar{ min-height: 250px; }
+
+/* --- Two-column content + sidebar (card page, article pages) --- */
+.content-layout{ display:grid; grid-template-columns: 1fr 300px; gap: 56px; align-items:start; }
+@media (max-width: 940px){ .content-layout{ grid-template-columns: 1fr; } }
+.sidebar-stack{ display:flex; flex-direction:column; gap: 28px; position:sticky; top: 100px; }
+
+/* --- Meaning blocks (card detail page) --- */
+.meaning-block{ margin-bottom: 46px; }
+.meaning-tag{
+  display:inline-block; font-size: 0.78rem; color: var(--gold-leaf);
+  border: 1px solid var(--line-hair-bright); padding: 4px 12px; margin-bottom: 18px;
+}
+.keyword-row{ display:flex; flex-wrap:wrap; gap: 10px; margin-bottom: 24px; }
+.keyword-row span{
+  font-size: 0.82rem; color: var(--mist); border-bottom: 1px solid var(--line-hair-bright);
+  padding-bottom: 2px;
+}
+.aspect-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: 28px; margin-top: 28px; }
+@media (max-width: 760px){ .aspect-grid{ grid-template-columns: 1fr; } }
+.aspect-grid h4{ font-size: 0.95rem; color: var(--gold-soft); margin-bottom: 8px; }
+.aspect-grid p{ font-size: 0.92rem; }
+
+/* --- FAQ accordion --- */
+.faq-item{ border-bottom: 1px solid var(--line-hair); }
+.faq-q{
+  width:100%; text-align:left; background:none; border:none; cursor:pointer;
+  padding: 24px 0; display:flex; justify-content:space-between; align-items:center;
+  color: var(--parchment); font-family: var(--font-display); font-size: 1.1rem;
+  gap: 20px;
+}
+.faq-q .icon{ color: var(--gold-leaf); font-size: 1.3rem; flex-shrink:0; transition: transform .25s ease; }
+.faq-item.open .faq-q .icon{ transform: rotate(45deg); }
+.faq-a{ max-height:0; overflow:hidden; transition: max-height .35s ease; }
+.faq-item.open .faq-a{ max-height: 900px; }
+.faq-a-inner{ padding: 0 0 26px; color: var(--mist); font-size: 0.96rem; }
+
+/* --- Steps (How to Use) --- */
+.step-list{ display:flex; flex-direction:column; gap:0; }
+.step{
+  display:grid; grid-template-columns: 60px 1fr; gap: 24px; padding: 34px 0;
+  border-top: 1px solid var(--line-hair);
+}
+.step:last-child{ border-bottom: 1px solid var(--line-hair); }
+.step .step-num{ font-family: var(--font-display); font-size: 1.6rem; color: var(--gold-leaf); }
+
+/* --- Forms --- */
+.form-grid{ display:grid; gap: 18px; max-width: 560px; }
+.form-grid label{ display:block; font-size:0.85rem; color: var(--mist); margin-bottom: 6px; }
+.form-grid input, .form-grid textarea{
+  width:100%; background: var(--ink-deep); border: 1px solid var(--line-hair-bright);
+  color: var(--parchment); padding: 12px 14px; font-family: var(--font-body); font-size: 0.95rem;
+}
+.form-grid input:focus, .form-grid textarea:focus{ outline: 2px solid var(--gold-leaf); outline-offset:1px; }
+
+/* --- Footer --- */
+.site-footer{ border-top: 1px solid var(--line-hair); padding: 56px 0 30px; background: var(--ink-deep); }
+.footer-grid{ display:grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 40px; margin-bottom: 44px; }
+@media (max-width: 760px){ .footer-grid{ grid-template-columns: 1fr 1fr; } }
+.footer-col h4{ font-size: 0.82rem; color: var(--gold-leaf); margin-bottom: 16px; font-weight:500; }
+.footer-col a{ display:block; font-size: 0.87rem; color: var(--mist); margin-bottom: 10px; }
+.footer-col a:hover{ color: var(--gold-soft); }
+.footer-bottom{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size: 0.78rem; color: var(--mist-dim); border-top:1px solid var(--line-hair); padding-top: 24px; }
+
+/* --- Breadcrumb --- */
+.breadcrumb{ font-size: 0.8rem; color: var(--mist-dim); margin-bottom: 20px; }
+.breadcrumb a:hover{ color: var(--gold-soft); }
+
+/* --- Accessibility: visible focus, reduced motion --- */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+  outline: 2px solid var(--gold-leaf); outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; transition: none !important; }
+}
+
+.eyebrow{ color: var(--gold-leaf); font-size:0.85rem; margin-bottom:14px; }
+.legal-body h2{ margin-top: 44px; }
+.legal-body p, .legal-body li{ color: var(--mist); max-width: 74ch; }
+.legal-body ul{ padding-left: 22px; }
+.updated-date{ color: var(--mist-dim); font-size: 0.82rem; margin-bottom: 40px; }
